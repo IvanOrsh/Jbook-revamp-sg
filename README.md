@@ -306,3 +306,5 @@ const onClick = async () => {
 ### Monaco Editor
 
 `npm install @monaco-editor/react`
+
+**note**: no monaco-jsx-highlighter yet, probably never

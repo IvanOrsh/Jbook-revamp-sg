@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import * as esbuild from "esbuild-wasm";
 
+import CodeEditor from "./components/code-editor";
 import { fetchPlugin } from "./plugins/fetch-plugin";
 import { unpkgPathPlugin } from "./plugins/unpkg-path-plugins";
 
@@ -52,6 +53,10 @@ const App: React.FC = () => {
 
   return (
     <div>
+      <CodeEditor
+        initialValue="const a = 1;"
+        onChange={(value) => setInput(value)}
+      />
       <textarea
         value={input}
         onChange={(e) => setInput(e.target.value)}
