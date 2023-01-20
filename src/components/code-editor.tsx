@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { useRef } from "react";
 import MonacoEditor, { Monaco, OnMount, OnChange } from "@monaco-editor/react";
 import monaco from "monaco-editor";
@@ -19,7 +18,6 @@ const CodeEditor: React.FC<CodeEditorProps> = ({ initialValue, onChange }) => {
     editor: monaco.editor.IStandaloneCodeEditor,
     monaco: Monaco
   ) => {
-    //@ts-ignore
     editorRef.current = editor;
     editorRef.current.getModel()?.updateOptions({
       tabSize: 2,
