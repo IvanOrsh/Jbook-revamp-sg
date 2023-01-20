@@ -50,3 +50,40 @@ Small amount of JS ----> WASM <- Go Lang bundler compileed to work in the browse
 5. Attempt to load that file up <- `onLoad` step
 
 ---
+
+#### Example:
+
+```ts
+export const unpkgPathPlugin = () => {
+  return {
+    name: "unpkg-path-plugin",
+    setup(build: esbuild.PluginBuild) {
+      build.onResolve({ filter: /.*/ }, async (args: any) => {
+        console.log("onResolve", args);
+        return { path: args.path, namespace: "a" };
+      });
+
+      build.onLoad({ filter: /.*/ }, async (args: any) => {
+        console.log("onLoad", args);
+
+        if (args.path === "index.js") {
+          return {
+            loader: "jsx",
+            contents: `
+          import message from './message';
+          console.log(message);
+        `,
+          };
+        } else {
+          return {
+            loader: "jsx",
+            contents: 'export default "hi there!"',
+          };
+        }
+      });
+    },
+  };
+};
+```
+
+---
