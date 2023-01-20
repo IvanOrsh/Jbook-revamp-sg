@@ -1,0 +1,56 @@
+{
+  "name": "jbook-revamp-sg",
+  "version": "1.0.0",
+  "description": "jbook",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "check-types": "tsc",
+    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
+    "check-format": "npm run format -- --list-different",
+    "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\" --quiet",
+    "validate": "npm-run-all --parallel check-types check-format lint build",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IvanOrsh/Jbook-revamp-sg.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IvanOrsh/Jbook-revamp-sg/issues"
+  },
+  "homepage": "https://github.com/IvanOrsh/Jbook-revamp-sg#readme",
+  "devDependencies": {
+    "@types/node": "^18.11.18",
+    "@types/prettier": "^2.7.2",
+    "@types/react": "^18.0.27",
+    "@types/react-dom": "^18.0.10",
+    "@typescript-eslint/eslint-plugin": "^5.48.2",
+    "@typescript-eslint/parser": "^5.48.2",
+    "@vitejs/plugin-react": "^3.0.1",
+    "eslint": "^8.32.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-import-resolver-typescript": "^2.7.1",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "eslint-plugin-react": "^7.32.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "lint-staged": "^13.1.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.8.3",
+    "typescript": "^4.9.4",
+    "vite": "^4.0.4",
+    "husky": "^8.0.0"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.7.0"
+  }
+}
