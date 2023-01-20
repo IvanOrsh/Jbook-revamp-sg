@@ -3,6 +3,8 @@ import * as esbuild from "esbuild-wasm";
 
 import App from "./App";
 
+import "bulmaswatch/superhero/bulmaswatch.min.css";
+
 new Promise((res) => setTimeout(res, 100))
   .then(() =>
     esbuild.initialize({
