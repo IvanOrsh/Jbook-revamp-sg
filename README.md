@@ -256,7 +256,7 @@ export const fetchPlugin = (inputCode: string) => {
 
 ---
 
-## IFrames
+## IFrame for our Preview componet
 
 **Direct access between frames is allowed when...**
 
@@ -295,7 +295,7 @@ const onClick = async () => {
 
 ---
 
-## Open Source Browser-Based Editors:
+## Open Source Browser-Based Editors for our CodeCell component
 
 - **CodeMirror** - easy to use, doesn't have may out-of-the-box features
 - **Ace Editor** - moderately easy to use, widely used
@@ -410,3 +410,7 @@ inside our iframe (in Preview component):
 2. handle this object accordingly (pass it through CodeCell ot Preview component)
 
 ---
+
+## Markdown cell
+
+- `@uiw/react-md-editor`
