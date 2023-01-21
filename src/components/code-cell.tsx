@@ -1,18 +1,24 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import CodeEditor from "./code-editor";
 import Preview from "./preview";
 import { bundle } from "../bundle";
 import Resizable from "./resizable";
+import { useLazyEffect } from "./use-lazy-effect";
 
 const CodeCell: React.FC = () => {
   const [input, setInput] = useState("");
   const [code, setCode] = useState("");
 
-  const onClick = async () => {
-    const output = await bundle(input);
-    setCode(output);
-  };
+  useLazyEffect(
+    () => {
+      bundle(input)
+        .then((output) => setCode(output))
+        .catch((err) => console.error(err));
+    },
+    [input],
+    1000
+  );
 
   return (
     <Resizable direction="vertical">
@@ -29,15 +35,6 @@ const CodeCell: React.FC = () => {
             onChange={(value) => setInput(value)}
           />
         </Resizable>
-        {/* <div>
-          <button
-            onClick={() => {
-              void onClick();
-            }}
-          >
-            Submit
-          </button>
-        </div> */}
         <Preview code={code} />
       </div>
     </Resizable>

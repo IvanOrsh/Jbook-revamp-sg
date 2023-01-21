@@ -308,3 +308,49 @@ const onClick = async () => {
 `npm install @monaco-editor/react`
 
 **note**: no monaco-jsx-highlighter yet, probably never
+
+---
+
+## Reasonable debouncing
+
+### Adding debouncing logic for bundling
+
+- we should only start (in-browser) bundling process only after 1 second without any updates to 'input' state (CodeCell component)
+
+- useEffect solution:
+
+```js
+useEffect(() => {
+  const timer = setTimeout(async () => {
+    const output = await bundle(input);
+    setCode(output);
+  }, 1000);
+
+  return () => {
+    clearTimeout(timer);
+  };
+}, [input]);
+```
+
+- found on stackoverflow:
+
+```js
+export function useLazyEffect(effect: EffectCallback, deps: DependencyList = [], wait = 300) {
+  const cleanUp = useRef<void | (() => void)>();
+  const effectRef = useRef<EffectCallback>();
+  const updatedEffect = useCallback(effect, deps);
+  effectRef.current = updatedEffect;
+  const lazyEffect = useCallback(
+    _.debounce(() => {
+      cleanUp.current = effectRef.current?.();
+    }, wait),
+    [],
+  );
+  useEffect(lazyEffect, deps);
+  useEffect(() => {
+    return () => {
+      cleanUp.current instanceof Function ? cleanUp.current() : undefined;
+    };
+  }, []);
+}
+```
