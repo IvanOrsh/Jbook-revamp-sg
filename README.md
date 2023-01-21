@@ -414,3 +414,34 @@ inside our iframe (in Preview component):
 ## Markdown cell
 
 - `@uiw/react-md-editor`
+
+---
+
+## Redux Desingn
+
+**Action Creators**:
+
+- updateCell
+- deleteCell
+- insertCellBefore/After
+- moveCell
+- fetchCell
+
+---
+
+**Redux Store**:
+
+**cell**:
+
+- data - array of cells (`{ [cell id]: Cell }`)
+- loading - boolean (`boolean`)
+- error - string | null (`string | null`)
+- order - order of cells (`string[]`)
+
+---
+
+**bundles**:
+
+- data - bundle for each cell (`{ [cell id]: Bundle }`)
+
+---
