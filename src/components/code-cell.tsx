@@ -9,12 +9,16 @@ import { useLazyEffect } from "../hooks/use-lazy-effect";
 const CodeCell: React.FC = () => {
   const [input, setInput] = useState("");
   const [code, setCode] = useState("");
+  const [err, setErr] = useState("");
 
   useLazyEffect(
     () => {
       bundle(input)
-        .then((output) => setCode(output))
-        .catch((err) => console.error(err));
+        .then((output) => {
+          setCode(output.code);
+          setErr(output.err);
+        })
+        .catch((err) => console.error(err)); // TODO: this is not going to fix itself
     },
     [input],
     1000
@@ -35,7 +39,7 @@ const CodeCell: React.FC = () => {
             onChange={(value) => setInput(value)}
           />
         </Resizable>
-        <Preview code={code} />
+        <Preview code={code} err={err} />
       </div>
     </Resizable>
   );

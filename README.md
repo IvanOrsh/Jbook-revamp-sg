@@ -395,3 +395,18 @@ inside our iframe (in Preview component):
 ```
 
 ---
+
+### showing bundling errors
+
+1. from bundle function return an object:
+
+```js
+{
+  code: result.outputFiles[0].text; // if err -> ''
+  err: ""; // if err -> err.message
+}
+```
+
+2. handle this object accordingly (pass it through CodeCell ot Preview component)
+
+---
