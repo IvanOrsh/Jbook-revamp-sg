@@ -354,3 +354,44 @@ export function useLazyEffect(effect: EffectCallback, deps: DependencyList = [],
   }, []);
 }
 ```
+
+---
+
+## Showing delayed error in Preview component
+
+- currently: showing only sync runtime errors in Preview component
+- goal: find a way to show bundling errors (or syntax error) and async errors
+
+### showing async errors
+
+inside our iframe (in Preview component):
+
+```html
+<script>
+  const handleError = (err) => {
+    const root = document.getElementById("root");
+    root.innerHTML =
+      '<div style="color: red;"><h4>Runtime Error</h4>' + err + "</div>";
+    console.error(err);
+  };
+
+  window.addEventListener("error", (event) => {
+    event.preventDefault();
+    handleError(event.error);
+  });
+
+  window.addEventListener(
+    "message",
+    (event) => {
+      try {
+        eval(event.data);
+      } catch (err) {
+        handleError(err);
+      }
+    },
+    false
+  );
+</script>
+```
+
+---
