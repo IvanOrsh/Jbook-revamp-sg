@@ -39,9 +39,11 @@ const Preview: React.FC<PreviewProps> = ({ code }) => {
   useEffect(() => {
     if (iframe && iframe.current) {
       iframe.current.srcdoc = html;
-      if (iframe.current.contentWindow) {
-        iframe.current.contentWindow.postMessage(code, "*");
-      }
+      setTimeout(() => {
+        if (iframe?.current?.contentWindow) {
+          iframe.current.contentWindow.postMessage(code, "*");
+        }
+      }, 50);
     }
   }, [code]);
 
