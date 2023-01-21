@@ -1,10 +1,10 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import CodeEditor from "./code-editor";
 import Preview from "./preview";
 import { bundle } from "../bundle";
 import Resizable from "./resizable";
-import { useLazyEffect } from "./use-lazy-effect";
+import { useLazyEffect } from "../hooks/use-lazy-effect";
 
 const CodeCell: React.FC = () => {
   const [input, setInput] = useState("");
