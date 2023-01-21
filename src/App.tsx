@@ -5,7 +5,7 @@ const App: React.FC = () => {
   return (
     <div>
       <CodeCell />
-      <CodeCell />
+      {/* <CodeCell /> */}
     </div>
   );
 };
