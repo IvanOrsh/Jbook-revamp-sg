@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 
 import CodeEditor from "./components/code-editor";
 import Preview from "./components/preview";
-import bundle from "./bundle";
+import { bundle } from "./bundle";
 
 const App: React.FC = () => {
   const [input, setInput] = useState("");
