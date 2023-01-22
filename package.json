@@ -52,10 +52,12 @@
   },
   "dependencies": {
     "@monaco-editor/react": "^4.4.6",
+    "@reduxjs/toolkit": "^1.9.1",
     "@uiw/react-md-editor": "^3.20.2",
     "axios": "^1.2.3",
     "bulmaswatch": "^0.8.1",
     "esbuild-wasm": "^0.17.2",
+    "immer": "^9.0.18",
     "localforage": "^1.10.0",
     "lodash.debounce": "^4.0.8",
     "monaco-editor": "^0.34.1",
