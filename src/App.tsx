@@ -1,12 +1,14 @@
 import React from "react";
-import CodeCell from "./components/code-cell";
-import TextEditor from "./components/text-editor";
+import { Provider } from "react-redux";
+
+import { store } from "./state";
+import CellList from "./components/cell-list";
 
 const App: React.FC = () => {
   return (
-    <div className="container">
-      <TextEditor />
-    </div>
+    <Provider store={store}>
+      <CellList />
+    </Provider>
   );
 };
 

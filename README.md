@@ -425,6 +425,7 @@ inside our iframe (in Preview component):
 - deleteCell
 - insertCellBefore/After
 - moveCell
+
 - fetchCell
 
 ---
@@ -438,10 +439,77 @@ inside our iframe (in Preview component):
 - error - string | null (`string | null`)
 - order - order of cells (`string[]`)
 
+example:
+
+```js
+{
+  loading: false,
+  error: null,
+  order: ['dfdfdfdfd', 'jdfjdfjdk'],
+  data: {
+    'dfdfdfdfd': {
+      id: 'dfdfdfdfd',
+      type: 'code',
+      content: 'const a = 1;',
+    },
+    'jdfjdfjdk': {
+      id: 'jdfjdfjdk',
+      type: 'text',
+      content: 'Documentation for this code',
+    },
+  },
+};
+
+```
+
 ---
 
 **bundles**:
 
 - data - bundle for each cell (`{ [cell id]: Bundle }`)
+
+---
+
+### Using Immer
+
+without immer:
+
+```ts
+// ...
+  switch (action.type) {
+      case ActionType.UPDATE_CELL:
+        const { id, content } = action.payload;
+        return {
+          ...state,
+          data: {
+            ...state.data,
+            [id]: {
+              ...state.data[id],
+              content,
+            },
+          },
+        };
+// ...
+```
+
+with immer:
+
+```js
+import produce from "immer";
+```
+
+```ts
+const reducer = produce((state: CellsState = initialState, action: Action) => {
+  if (action.type === ActionType.UPDATE_CELL) {
+    const { id, content } = action.payload;
+    state.data[id].content = content;
+  }
+
+  if () {
+    // ...
+  }
+  // and so on...absent
+}, initialState);
+```
 
 ---
