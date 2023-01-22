@@ -5,22 +5,28 @@ import Preview from "./preview";
 import { bundle } from "../bundle";
 import Resizable from "./resizable";
 import { useLazyEffect } from "../hooks/use-lazy-effect";
+import { Cell } from "../state";
+import { useActions } from "../hooks/use-actions";
 
-const CodeCell: React.FC = () => {
-  const [input, setInput] = useState("");
+interface CodeCellProps {
+  cell: Cell;
+}
+
+const CodeCell: React.FC<CodeCellProps> = ({ cell }) => {
   const [code, setCode] = useState("");
   const [err, setErr] = useState("");
+  const { updateCell } = useActions();
 
   useLazyEffect(
     () => {
-      bundle(input)
+      bundle(cell.content)
         .then((output) => {
           setCode(output.code);
           setErr(output.err);
         })
         .catch((err) => console.error(err)); // TODO: this is not going to fix itself
     },
-    [input],
+    [cell.content],
     1000
   );
 
@@ -35,8 +41,8 @@ const CodeCell: React.FC = () => {
       >
         <Resizable direction="horizontal">
           <CodeEditor
-            initialValue="const a = 1;"
-            onChange={(value) => setInput(value)}
+            initialValue={cell.content}
+            onChange={(value) => updateCell(cell.id, value)}
           />
         </Resizable>
         <Preview code={code} err={err} />
