@@ -60,7 +60,7 @@ export const cellsSlice = createSlice({
       state.order[targetIndex] = action.payload.id;
     },
 
-    insertCellBefore: (
+    insertCellAfter: (
       state,
       action: PayloadAction<{ id: string | null; type: CellTypes }>
     ) => {
@@ -83,5 +83,5 @@ export const cellsSlice = createSlice({
   },
 });
 
-export const { updateCell, deleteCell, moveCell, insertCellBefore } =
+export const { updateCell, deleteCell, moveCell, insertCellAfter } =
   cellsSlice.actions;
