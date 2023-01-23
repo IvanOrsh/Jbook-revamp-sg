@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import MDEditor from "@uiw/react-md-editor";
+import rehypeSanitize from "rehype-sanitize";
 import React, { useEffect, useState, useRef } from "react";
 
 import { Cell } from "../state";
@@ -32,19 +33,19 @@ const TextEditor: React.FC<TextEditorProps> = ({ cell }) => {
   }, []);
 
   return (
-    <div className="card text-editor" ref={ref}>
+    <div className="card" ref={ref}>
       {editing ? (
-        <div className="card-content">
+        <div className="text-editor">
           <MDEditor
             value={cell.content}
             onChange={(v) => updateCell(cell.id, v || "")}
+            previewOptions={{
+              rehypePlugins: [[rehypeSanitize]],
+            }}
           />
         </div>
       ) : (
-        <div
-          className="card-content text-editor"
-          onClick={() => setEditing(true)}
-        >
+        <div className="card-content" onClick={() => setEditing(true)}>
           <MDEditor.Markdown source={cell.content || "Click to edit"} />
         </div>
       )}
