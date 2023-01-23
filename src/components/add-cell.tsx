@@ -5,16 +5,16 @@ import { useActions } from "../hooks/use-actions";
 import "./add-cell.css";
 
 interface AddCellProps {
-  nexCellId: string;
+  nextCellId: string | null;
 }
 
-const AddCell: React.FC<AddCellProps> = ({ nexCellId }) => {
+const AddCell: React.FC<AddCellProps> = ({ nextCellId }) => {
   const { insertCellBefore } = useActions();
 
   return (
     <div>
-      <button onClick={() => insertCellBefore(nexCellId, "code")}>Code</button>
-      <button onClick={() => insertCellBefore(nexCellId, "text")}>Text</button>
+      <button onClick={() => insertCellBefore(nextCellId, "code")}>Code</button>
+      <button onClick={() => insertCellBefore(nextCellId, "text")}>Text</button>
     </div>
   );
 };

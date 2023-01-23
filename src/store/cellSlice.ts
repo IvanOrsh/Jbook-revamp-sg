@@ -62,7 +62,7 @@ export const cellsSlice = createSlice({
 
     insertCellBefore: (
       state,
-      action: PayloadAction<{ id: string; type: CellTypes }>
+      action: PayloadAction<{ id: string | null; type: CellTypes }>
     ) => {
       const cell: Cell = {
         content: "",
