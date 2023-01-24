@@ -7,6 +7,7 @@ import { useLazyEffect } from "../hooks/use-lazy-effect";
 import { Cell } from "../state";
 import { useActions } from "../hooks/use-actions";
 import { useTypedSelector } from "../hooks/use-typed-selectors";
+import { useCumulativeCode } from "../hooks/use-cumulative-code";
 
 import "./code-cell.css";
 
@@ -17,54 +18,13 @@ interface CodeCellProps {
 const CodeCell: React.FC<CodeCellProps> = ({ cell }) => {
   const { updateCell, createBundle } = useActions();
   const bundle = useTypedSelector((state) => state.bundles[cell.id]);
-
-  const cumulativeCode = useTypedSelector((state) => {
-    const { data, order } = state.cells;
-    const orderedCells = order.map((id) => data[id]);
-
-    const showFunc = `
-    import _React from 'react';
-    import { createRoot as _createRoot } from 'react-dom/client';
-
-    var show = (value) => {
-      const container = document.getElementById('root');
-
-      if (typeof value === 'object') {
-        if (value.$$typeof && value.props) {
-          const root = _createRoot(container);
-          root.render(value);
-        } else {
-          container.innerHTML = JSON.stringify(value);
-        }
-      } else {
-        container.innerHTML = value;
-      }
-    };
-    `;
-
-    const showFuncNoop = "var show = () => {}";
-
-    const cumulativeCode = [];
-
-    for (const c of orderedCells) {
-      if (c.type === "code") {
-        const sjow = c.id === cell.id ? showFunc : showFuncNoop;
-        cumulativeCode.push(sjow);
-        cumulativeCode.push(c.content);
-      }
-
-      if (c.id === cell.id) {
-        break;
-      }
-    }
-    return cumulativeCode;
-  });
+  const cumulativeCode = useCumulativeCode(cell.id);
 
   useLazyEffect(
     () => {
-      createBundle(cell.id, cumulativeCode.join("\n"));
+      createBundle(cell.id, cumulativeCode);
     },
-    [cumulativeCode.join("\n"), cell.id],
+    [cumulativeCode, cell.id],
     1000
   );
 
