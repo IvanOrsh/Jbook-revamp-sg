@@ -426,6 +426,8 @@ inside our iframe (in Preview component):
 - insertCellBefore/After
 - moveCell
 
+- createBundle
+
 - fetchCell
 
 ---
@@ -438,6 +440,8 @@ inside our iframe (in Preview component):
 - loading - boolean (`boolean`)
 - error - string | null (`string | null`)
 - order - order of cells (`string[]`)
+
+---
 
 example:
 
@@ -510,6 +514,20 @@ const reducer = produce((state: CellsState = initialState, action: Action) => {
   }
   // and so on...absent
 }, initialState);
+```
+
+---
+
+### Connecting Bundles in Redux
+
+- by adding a joining step:
+
+```txt
+
+code Cell 1 --> code cell 1 -> bundler
+code Cell 2 --> code cell 1 + code cell 2 --> bunder
+and so on...
+
 ```
 
 ---
