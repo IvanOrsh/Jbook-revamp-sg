@@ -417,7 +417,7 @@ inside our iframe (in Preview component):
 
 ---
 
-## Redux Desingn
+## Redux Design
 
 **Action Creators**:
 
@@ -531,3 +531,50 @@ and so on...
 ```
 
 ---
+
+## Saving cells locally & CLI
+
+- We should be able to save (and load) a user's nokebook (jbook) to / from their hard drive
+- jbook's users should be able to use `npx jbook serve` to run our cli
+
+1. `npx jbook serve` starts our cli
+2. our cli starts local node api that:
+
+- builds client files
+- loads user's notebook (jbook) (from user's hard drive)
+- serves client files on `localhost:4050`
+
+---
+
+**CLI**:
+
+- Needs to know how to start up the Local API
+- Needs to know how to publish a notebook to the Public API
+
+---
+
+**Local Express API**:
+
+- Needs to serve up the react app
+- Needs to be able to save/load cells from a file
+
+---
+
+**Public Express API**:
+
+- Needs to serve up the react app
+- Needs to be able to save/load cells from a DB
+- Needs to handle auth/persmissions/etc
+
+---
+
+**React App**
+
+- needs to make its production assets available to either the local API or the public API
+
+---
+
+### Lerna CLI
+
+- tool for manging a multi-package project
+- 2 6 1

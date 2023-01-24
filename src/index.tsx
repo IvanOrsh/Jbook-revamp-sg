@@ -4,7 +4,7 @@ import * as esbuild from "esbuild-wasm";
 import "bulmaswatch/superhero/bulmaswatch.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
-import App from "./App";
+import App from "./app/App";
 
 new Promise((res) => setTimeout(res, 100))
   .then(() =>
