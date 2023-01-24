@@ -1,17 +1,17 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
-type CellTypes = "code" | "text";
+export type CellTypes = "code" | "text";
 
-type Direction = "up" | "down";
+export type Direction = "up" | "down";
 
-interface Cell {
+export interface Cell {
   id: string;
   type: CellTypes;
   content: string;
 }
 
-interface CellsState {
+export interface CellsState {
   loading: boolean;
   error: string | null;
   order: string[];
@@ -27,7 +27,7 @@ const initialState: CellsState = {
   data: {},
 };
 
-export const cellsSlice = createSlice({
+const cellsSlice = createSlice({
   name: "cells",
   initialState,
   reducers: {
@@ -84,5 +84,8 @@ export const cellsSlice = createSlice({
   },
 });
 
-export const { updateCell, deleteCell, moveCell, insertCellAfter } =
+// slice action creators
+export const { deleteCell, moveCell, updateCell, insertCellAfter } =
   cellsSlice.actions;
+
+export default cellsSlice.reducer;

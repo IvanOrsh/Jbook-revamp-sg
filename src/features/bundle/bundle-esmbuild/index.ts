@@ -2,7 +2,7 @@ import * as esbuild from "esbuild-wasm";
 
 import { fetchPlugin } from "./plugins/fetch-plugin";
 import { unpkgPathPlugin } from "./plugins/unpkg-path-plugins";
-import { getErrorMessage } from "../utils/get-error-message";
+import { getErrorMessage } from "../../../common/utils/get-error-message";
 
 export const bundle = async (rawCode: string) => {
   try {

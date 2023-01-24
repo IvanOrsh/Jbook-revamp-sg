@@ -1,9 +1,9 @@
 import React from "react";
 
-import { Cell } from "../state";
-import CodeCell from "./code-cell";
-import TextEditor from "./text-editor";
-import ActionBar from "./action-bar";
+import { Cell } from "../../../features/cells/cellSlice";
+import CodeCell from "../../../features/code-cell";
+import TextEditor from "../TextEditor/text-editor";
+import ActionBar from "../ActionBar/action-bar";
 
 import "./cell-list-item.css";
 

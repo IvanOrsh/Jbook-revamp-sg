@@ -4,8 +4,8 @@ import MDEditor from "@uiw/react-md-editor";
 import rehypeSanitize from "rehype-sanitize";
 import React, { useEffect, useState, useRef } from "react";
 
-import { Cell } from "../state";
-import { useActions } from "../hooks/use-actions";
+import { Cell } from "../../../features/cells/cellSlice";
+import { useActions } from "../../../hooks/use-actions";
 
 import "./text-editor.css";
 
@@ -38,7 +38,12 @@ const TextEditor: React.FC<TextEditorProps> = ({ cell }) => {
         <div className="text-editor">
           <MDEditor
             value={cell.content}
-            onChange={(v) => updateCell(cell.id, v || "")}
+            onChange={(v) =>
+              updateCell({
+                id: cell.id,
+                content: v || "",
+              })
+            }
             previewOptions={{
               rehypePlugins: [[rehypeSanitize]],
             }}

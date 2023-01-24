@@ -1,13 +1,13 @@
 import React from "react";
 
-import CodeEditor from "./code-editor";
-import Preview from "./preview";
-import Resizable from "./resizable";
+import CodeEditor from "../common/components/CodeEditor/code-editor";
+import Preview from "../common/components/Preview/preview";
+import Resizable from "../common/components/Resizable/resizable";
 import { useLazyEffect } from "../hooks/use-lazy-effect";
-import { Cell } from "../state";
-import { useActions } from "../hooks/use-actions";
+import { Cell } from "./cells/cellSlice";
 import { useTypedSelector } from "../hooks/use-typed-selectors";
 import { useCumulativeCode } from "../hooks/use-cumulative-code";
+import { useActions } from "../hooks/use-actions";
 
 import "./code-cell.css";
 
@@ -16,14 +16,13 @@ interface CodeCellProps {
 }
 
 const CodeCell: React.FC<CodeCellProps> = ({ cell }) => {
-  const { updateCell, createBundle } = useActions();
-  const bundle = useTypedSelector((state) => state.bundles[cell.id]);
+  const { createBundle, updateCell } = useActions();
+
+  const bundle = useTypedSelector((state) => state.bundle[cell.id]);
   const cumulativeCode = useCumulativeCode(cell.id);
 
   useLazyEffect(
-    () => {
-      createBundle(cell.id, cumulativeCode);
-    },
+    () => void createBundle(cell.id, cumulativeCode),
     [cumulativeCode, cell.id],
     1000
   );
@@ -40,7 +39,12 @@ const CodeCell: React.FC<CodeCellProps> = ({ cell }) => {
         <Resizable direction="horizontal">
           <CodeEditor
             initialValue={cell.content}
-            onChange={(value) => updateCell(cell.id, value)}
+            onChange={(value) =>
+              updateCell({
+                id: cell.id,
+                content: value,
+              })
+            }
           />
         </Resizable>
         <div className="progress-wrapper">

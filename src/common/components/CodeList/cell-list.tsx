@@ -1,8 +1,8 @@
 import React from "react";
 
-import { useTypedSelector } from "../hooks/use-typed-selectors";
-import AddCell from "./add-cell";
-import CellListItem from "./cell-list-item";
+import { useTypedSelector } from "../../../hooks/use-typed-selectors";
+import AddCell from "../AddCell/add-cell";
+import CellListItem from "../CellListItem/cell-list-item";
 
 import "./cell-list.css";
 
